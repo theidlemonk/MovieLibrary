@@ -27,13 +27,13 @@ namespace MovieRepo
 
             //if (MovieSearchTitle.ToUpper() == "THIS")
             //{ 
-                Movie movie = new Movie();
-                movie.Title = "Analyse This";
-                movie.Year = 2012;
-                
-                movies.Add(movie);
-                return movies;
-                           
+            Movie movie = new Movie();
+            movie.Title = "Analyse This";
+            movie.Year = 2012;
+
+            movies.Add(movie);
+            return movies;
+
             //}
 
 
@@ -42,7 +42,8 @@ namespace MovieRepo
         public List<Movie> GetListOfMovies(string MovieSearchTitleText)
         {
             XmlDocument xmlDoc = new XmlDocument();
-            xmlDoc.Load(@"C:\code\GitHub\visual studio 2012\Projects\MovieLibrary\MovieRepo\MovieList.xml");
+            xmlDoc.Load(GetBaseDirectoryPath() + "\\MovieLibrary\\MovieRepo\\MovieList.xml");
+
             List<Movie> movieList = new List<Movie>();
             foreach (XmlNode node in xmlDoc.DocumentElement.ChildNodes)
             {
@@ -50,6 +51,12 @@ namespace MovieRepo
                 movieList.Add(new Movie { Title = node.Attributes["title"].Value });
             }
             return movieList;
+        }
+
+        private static string GetBaseDirectoryPath()
+        {
+            string wholeDir = AppDomain.CurrentDomain.BaseDirectory;
+            return wholeDir.Substring(0, wholeDir.IndexOf("MovieLibrary") - 1);
         }
     }
 }
