@@ -46,7 +46,8 @@ namespace MovieRepo
             List<Movie> movieList = new List<Movie>();
             foreach (XmlNode node in xmlDoc.DocumentElement.ChildNodes)
             {
-                string movie = node.Attributes["title"].Value;
+                //string movie = node.Attributes["title"].Value;
+                movieList.Add(new Movie { Title = node.Attributes["title"].Value });
             }
             return movieList;
         }

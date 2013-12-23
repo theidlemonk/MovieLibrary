@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
 using MovieRepo;
+using MovieLibrary.Models;
 
 namespace MovieLibrary.Controllers
 {
@@ -25,11 +26,16 @@ namespace MovieLibrary.Controllers
         public ActionResult MovieListing()
         {
             IMovieRepository _movieRepository = new MovieRepository();
-            var movie = _movieRepository.GetListOfMovies("This");
-            List<Movie> viewMovie = new List<Movie>(movie);
+            var movieList = _movieRepository.GetListOfMovies("This");
+            List<MovieLibrary.Models.Movie> viewMovie = new List<MovieLibrary.Models.Movie>();
+
+            foreach (var movie in movieList)
+            {
+                viewMovie.Add(new MovieLibrary.Models.Movie { Title = movie.Title });
+            }
            
             //Mapper.Map<Movie>(movie);
-            return View("MovieListings");
+            return View("MovieListings",viewMovie);
         }
 
         public ActionResult Index()

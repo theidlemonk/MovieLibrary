@@ -18,10 +18,10 @@ namespace MovieLibrary.Models
         public string MovieId { get; set; }
     }
 
-    class Reviews
-    {
-        public string MovieId { get; set; }
-        public string Review { get; set; }
-        public string User { get; set; }
-    }
+    //class Reviews
+    //{
+    //    public string MovieId { get; set; }
+    //    public string Review { get; set; }
+    //    public string User { get; set; }
+    //}
 }
