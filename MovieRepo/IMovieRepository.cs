@@ -5,9 +5,8 @@ using System.Web;
 
 namespace MovieRepo
 {
-    public interface IMovieRepository 
+    public interface IMovieRepository
     {
-         List<Movie> GetMovieSearchResultsByTitle(string MovieSearchTitle);
-         List<Movie> GetListOfMovies(string MovieSearchTitleText);
+        List<Movie> GetListOfPossibleMovies(string MovieSearchTitleText);
     }
 }

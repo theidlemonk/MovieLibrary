@@ -7,11 +7,23 @@
 <h2>MovieListings</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Back To Home", "Index", "Movie")
 </p>
-<table>
-
-
+<table class="grid">
+     <tr>
+        <th>
+            Title
+        </th>
+        <th>
+            Year
+        </th>
+        <th>
+            Type
+        </th>
+        <th>
+            ID
+        </th>
+    </tr>
 @foreach (var item in Model) {
     <tr>
         <td>
@@ -21,27 +33,10 @@
             @Html.DisplayFor(modelItem => item.Year)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Rating)
+            @Html.DisplayFor(modelItem => item.Type)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Released)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Genre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Actors)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Plot)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Poster)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.MovieId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.MovieId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.MovieId })
+            @Html.DisplayFor(modelItem => item.MovieId)
         </td>
     </tr>
 }

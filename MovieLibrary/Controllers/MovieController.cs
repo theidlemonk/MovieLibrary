@@ -26,12 +26,15 @@ namespace MovieLibrary.Controllers
         public ActionResult MovieListing()
         {
             IMovieRepository _movieRepository = new MovieRepository();
-            var movieList = _movieRepository.GetListOfMovies("This");
+            var movieList = _movieRepository.GetListOfPossibleMovies("True Grit");
             List<MovieLibrary.Models.Movie> viewMovie = new List<MovieLibrary.Models.Movie>();
 
             foreach (var movie in movieList)
             {
                 viewMovie.Add(new MovieLibrary.Models.Movie { Title = movie.Title });
+                viewMovie.Add(new MovieLibrary.Models.Movie { MovieId = movie.MovieId });
+                viewMovie.Add(new MovieLibrary.Models.Movie { Type = movie.Type });
+                viewMovie.Add(new MovieLibrary.Models.Movie { Year = movie.Year });
             }
            
             //Mapper.Map<Movie>(movie);

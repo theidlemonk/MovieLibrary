@@ -1,62 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Web;
 using System.Xml;
+using System.Xml.Serialization;
 
 namespace MovieRepo
 {
     public class MovieRepository : IMovieRepository
     {
-        public List<Movie> GetMovieSearchResultsByTitle(string MovieSearchTitle)
+       
+
+        public List<Movie> GetListOfPossibleMovies(string MovieSearchTitleText)
         {
+            string movieDetails = "";
+            HttpWebRequest request = WebRequest.Create("http://www.omdbapi.com/?s=" + MovieSearchTitleText + "&r=XML") as HttpWebRequest;
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            WebHeaderCollection header = response.Headers;
 
-            //HttpWebRequest request = WebRequest.Create("http://www.omdbapi.com/?s=" + MovieSearchTitle + "&r=XML") as HttpWebRequest;
-            //HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-            //WebHeaderCollection header = response.Headers;
-
-            //var encoding = ASCIIEncoding.ASCII;
-            //using (var reader = new System.IO.StreamReader(response.GetResponseStream(), encoding)) 
-            //{
-            //    string responseText = reader.ReadToEnd();
-            //}
-
-            List<Movie> movies = new List<Movie>();
-
-            //if (MovieSearchTitle.ToUpper() == "THIS")
-            //{ 
-            Movie movie = new Movie();
-            movie.Title = "Analyse This";
-            movie.Year = 2012;
-
-            movies.Add(movie);
-            return movies;
-
-            //}
-
-
-        }
-
-        public List<Movie> GetListOfMovies(string MovieSearchTitleText)
-        {
-            XmlDocument xmlDoc = new XmlDocument();
-            xmlDoc.Load(GetBaseDirectoryPath() + "\\MovieLibrary\\MovieRepo\\MovieList.xml");
-
-            List<Movie> movieList = new List<Movie>();
-            foreach (XmlNode node in xmlDoc.DocumentElement.ChildNodes)
+            var encoding = ASCIIEncoding.ASCII;
+            using (var reader = new StreamReader(response.GetResponseStream(), encoding))
             {
-                //string movie = node.Attributes["title"].Value;
-                movieList.Add(new Movie { Title = node.Attributes["title"].Value });
+                movieDetails = reader.ReadToEnd();
             }
-            return movieList;
+
+
+            XmlDocument xml = new XmlDocument();
+            xml.LoadXml(movieDetails);
+            XmlNodeList xnList = xml.SelectNodes("/root/Movie");
+            List<Movie> movieResults = new List<Movie>();
+            foreach (XmlNode xn in xnList)
+            {
+                movieResults.Add(new Movie { Title = xn.Attributes["Title"].Value });
+                movieResults.Add(new Movie { Year = xn.Attributes["Year"].Value });
+                movieResults.Add(new Movie { MovieId = xn.Attributes["imdbID"].Value });
+                movieResults.Add(new Movie { Type = xn.Attributes["Type"].Value });
+
+            }
+            return movieResults;
         }
 
-        private static string GetBaseDirectoryPath()
-        {
-            string wholeDir = AppDomain.CurrentDomain.BaseDirectory;
-            return wholeDir.Substring(0, wholeDir.IndexOf("MovieLibrary") - 1);
-        }
+        //private static string GetBaseDirectoryPath()
+        //{
+        //    string wholeDir = AppDomain.CurrentDomain.BaseDirectory;
+        //    return wholeDir.Substring(0, wholeDir.IndexOf("MovieLibrary") - 1);
+        //}
     }
 }
