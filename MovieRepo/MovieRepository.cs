@@ -12,7 +12,7 @@ namespace MovieRepo
 {
     public class MovieRepository : IMovieRepository
     {
-       
+
 
         public List<Movie> GetListOfPossibleMovies(string MovieSearchTitleText)
         {
@@ -34,10 +34,10 @@ namespace MovieRepo
             List<Movie> movieResults = new List<Movie>();
             foreach (XmlNode xn in xnList)
             {
-                movieResults.Add(new Movie { Title = xn.Attributes["Title"].Value });
-                movieResults.Add(new Movie { Year = xn.Attributes["Year"].Value });
-                movieResults.Add(new Movie { MovieId = xn.Attributes["imdbID"].Value });
-                movieResults.Add(new Movie { Type = xn.Attributes["Type"].Value });
+                movieResults.Add(new Movie { Title = xn.Attributes["Title"].Value, Year = xn.Attributes["Year"].Value, MovieId = xn.Attributes["imdbID"].Value, Type = xn.Attributes["Type"].Value });
+                //movieResults.Add(new Movie { Year = xn.Attributes["Year"].Value });
+                //movieResults.Add(new Movie { MovieId = xn.Attributes["imdbID"].Value });
+                //movieResults.Add(new Movie { Type = xn.Attributes["Type"].Value });
 
             }
             return movieResults;
