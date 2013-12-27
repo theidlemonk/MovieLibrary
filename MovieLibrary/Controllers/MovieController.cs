@@ -23,10 +23,10 @@ namespace MovieLibrary.Controllers
         {
         }
 
-        public ActionResult MovieListing()
+        public ActionResult GetMoviesFromKeyword(string movieKeyword)
         {
             IMovieRepository _movieRepository = new MovieRepository();
-            var movieList = _movieRepository.GetListOfPossibleMovies("True Grit");
+            var movieList = _movieRepository.GetListOfPossibleMovies(movieKeyword);
             List<MovieLibrary.Models.Movie> viewMovie = new List<MovieLibrary.Models.Movie>();
 
             foreach (var movie in movieList)

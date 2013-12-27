@@ -3,7 +3,13 @@
 }
 
 <h1>MovieHome</h1>
-<h2>MovieHome</h2>
-<h3>MovieHome</h3>
 
-<input id="btnMovie" type="button" value="Take Me To Movie" onclick="location.href='@Url.Action("MovieListing","Movie")'" />
+<h2>Looking for a movie!!?!!</h2>
+@*<input id="btnMovie" type="button" value="Take Me To Movie" onclick="location.href='@Url.Action("MovieListing","Movie")'" />*@
+
+
+@using (Html.BeginForm("GetMoviesFromKeyword","Movie",FormMethod.Get))
+{
+    @Html.TextBox("movieKeyword")
+    <input type="submit" value="Find Me Movies!" />
+}
