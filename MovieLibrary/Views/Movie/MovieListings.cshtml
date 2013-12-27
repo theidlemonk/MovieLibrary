@@ -17,12 +17,6 @@
         <th>
             Year
         </th>
-        <th>
-            Type
-        </th>
-        <th>
-            ID
-        </th>
     </tr>
 @foreach (var item in Model) {
     <tr>
@@ -33,10 +27,11 @@
             @Html.DisplayFor(modelItem => item.Year)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Type)
+            @Html.HiddenFor(modelItem => item.MovieId)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.MovieId)
+            @Html.ActionLink("TakeMe", "GetMovieDetailsFromMovieId", "Movie", new { MovieId = item.MovieId },null)
+
         </td>
     </tr>
 }

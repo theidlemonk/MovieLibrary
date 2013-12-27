@@ -8,5 +8,6 @@ namespace MovieRepo
     public interface IMovieRepository
     {
         List<Movie> GetListOfPossibleMovies(string MovieSearchTitleText);
+        List<Movie> GetMovieDetailsFromId(string MovieId);
     }
 }

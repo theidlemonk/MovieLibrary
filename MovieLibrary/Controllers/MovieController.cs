@@ -33,16 +33,47 @@ namespace MovieLibrary.Controllers
             {
                 if (movie.Type == "movie")
                 {
-                    viewMovie.Add(new MovieLibrary.Models.Movie { Title = movie.Title, MovieId = movie.MovieId, Type = movie.Type, Year = movie.Year });
-                    //viewMovie.Add(new MovieLibrary.Models.Movie { MovieId = movie.MovieId });
-                    //viewMovie.Add(new MovieLibrary.Models.Movie { Type = movie.Type });
-                    //viewMovie.Add(new MovieLibrary.Models.Movie { Year = movie.Year });
+                    viewMovie.Add(new MovieLibrary.Models.Movie
+                    {
+                        Title = movie.Title,
+                        MovieId = movie.MovieId,
+                        Type = movie.Type,
+                        Year = movie.Year
+                    });
                 }
             }
-           
 
-            //Mapper.Map<Movie>(movie);
-            return View("MovieListings",viewMovie);
+            return View("MovieListings", viewMovie);
+        }
+
+        public ActionResult GetMovieDetailsFromMovieId(string MovieId)
+        {
+            IMovieRepository _movieRepository = new MovieRepository();
+            var movieDetails = _movieRepository.GetMovieDetailsFromId(MovieId);
+           List<MovieLibrary.Models.Movie> viewMovieDetails = new List<MovieLibrary.Models.Movie>();
+
+            foreach (var movie in movieDetails)
+            {
+                viewMovieDetails.Add(new MovieLibrary.Models.Movie
+                {
+
+                    Title = movie.Title,
+                    Year = movie.Year,
+                    MovieId = movie.MovieId,
+                    Type = movie.Type,
+                    Poster = movie.Poster,
+                    Plot = movie.Plot,
+                    Genre = movie.Genre,
+                    Actors = movie.Actors,
+                    Rating = movie.Rating,
+                    Released = movie.Released
+
+
+                });
+            }
+
+            return View("MovieDetails",viewMovieDetails);
+
         }
 
         public ActionResult Index()
