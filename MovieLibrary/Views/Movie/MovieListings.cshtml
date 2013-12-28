@@ -9,31 +9,18 @@
 <p>
     @Html.ActionLink("Back To Home", "Index", "Movie")
 </p>
+<div>
 <table class="grid">
-     <tr>
-        <th>
-            Title
-        </th>
-        <th>
-            Year
-        </th>
-    </tr>
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Title)
+            @Html.ActionLink(item.Title, "GetMovieDetailsFromMovieId", "Movie", new { MovieId = item.MovieId },null)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Year)
-        </td>
-        <td>
-            @Html.HiddenFor(modelItem => item.MovieId)
-        </td>
-        <td>
-            @Html.ActionLink("TakeMe", "GetMovieDetailsFromMovieId", "Movie", new { MovieId = item.MovieId },null)
-
         </td>
     </tr>
 }
 
 </table>
+    </div>
