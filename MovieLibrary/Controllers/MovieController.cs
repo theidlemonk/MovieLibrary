@@ -29,28 +29,40 @@ namespace MovieLibrary.Controllers
             var movieList = _movieRepository.GetListOfPossibleMovies(movieKeyword);
             List<MovieLibrary.Models.Movie> viewMovie = new List<MovieLibrary.Models.Movie>();
 
-            foreach (var movie in movieList)
+            if (movieList.Count() == 0)
             {
-                if (movie.Type == "movie")
+                viewMovie.Add(new MovieLibrary.Models.Movie
                 {
-                    viewMovie.Add(new MovieLibrary.Models.Movie
+                    MovieKeyword = movieKeyword
+                });
+            }
+            else
+            {
+                foreach (var movie in movieList)
+                {
+                    if (movie.Type == "movie")
                     {
-                        Title = movie.Title,
-                        MovieId = movie.MovieId,
-                        Type = movie.Type,
-                        Year = movie.Year
-                    });
+                        viewMovie.Add(new MovieLibrary.Models.Movie
+                        {
+                            Title = movie.Title,
+                            MovieId = movie.MovieId,
+                            Type = movie.Type,
+                            Year = movie.Year,
+                            MovieKeyword = movieKeyword
+                        });
+                    }
                 }
             }
 
-            return View("MovieListings", viewMovie);
+            //return View("MovieLists", viewMovie);
+            return View("MovieHome", viewMovie);
         }
 
         public ActionResult GetMovieDetailsFromMovieId(string MovieId)
         {
             IMovieRepository _movieRepository = new MovieRepository();
             var movieDetails = _movieRepository.GetMovieDetailsFromId(MovieId);
-           List<MovieLibrary.Models.Movie> viewMovieDetails = new List<MovieLibrary.Models.Movie>();
+            List<MovieLibrary.Models.Movie> viewMovieDetails = new List<MovieLibrary.Models.Movie>();
 
             foreach (var movie in movieDetails)
             {
@@ -72,12 +84,16 @@ namespace MovieLibrary.Controllers
                 });
             }
 
-            return View("MovieDetails",viewMovieDetails);
+            return View("MovieDetails", viewMovieDetails);
 
         }
 
         public ActionResult Index()
         {
+            if (ModelState.IsValid)
+            {
+                ModelState.Clear();
+            }
             return View("MovieHome");
         }
 

@@ -1,15 +1,21 @@
-﻿@{
+﻿@model List<MovieLibrary.Models.Movie>
+
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>MovieHome</h1>
 
 <h2>Looking for a movie!!?!!</h2>
-@*<input id="btnMovie" type="button" value="Take Me To Movie" onclick="location.href='@Url.Action("MovieListing","Movie")'" />*@
 
-
-@using (Html.BeginForm("GetMoviesFromKeyword","Movie",FormMethod.Get))
+@using (Html.BeginForm("GetMoviesFromKeyword", "Movie", FormMethod.Get))
 {
     @Html.TextBox("movieKeyword")
     <input type="submit" value="Find Me Movies!" />
 }
+
+<p>
+     <input id="btnResetPage" type="button" value="Reset Search" onclick="location.href='@Url.Action("Index","Movie")'" />
+</p>
+
+@Html.Partial("_movieListings", Model)

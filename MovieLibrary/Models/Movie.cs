@@ -17,6 +17,7 @@ namespace MovieLibrary.Models
         public string Poster { get; set; }
         public string MovieId { get; set; }
         public string Type { get; set; }
+        public string MovieKeyword { get; set; }
     }
 
     //class Reviews

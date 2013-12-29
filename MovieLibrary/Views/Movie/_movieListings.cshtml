@@ -1,0 +1,46 @@
+﻿@model List<MovieLibrary.Models.Movie>
+
+
+@if(Model == null)
+{
+<div>
+<p>Please type in a keyword to search possible movies</p>
+        </div>
+}
+else if (Model[0].MovieKeyword.IsEmpty())
+{ 
+    <div>
+<p> Keyword cannot be empty</p>
+        </div>
+}
+else if (Model[0].Title.IsEmpty() )
+{ 
+    <div>
+<p>No movies were found with the entered keyword "@Model[0].MovieKeyword"</p>
+        </div>
+}
+else
+{
+<div>
+    <p>
+        Results from "@Model[0].MovieKeyword":
+    </p>
+    <p>
+    <table class="grid">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Year)
+                </td>
+                <td>
+                    @Html.ActionLink(item.Title, "GetMovieDetailsFromMovieId", "Movie", new { MovieId = item.MovieId }, null)
+                </td>
+                
+            </tr>
+        }
+
+    </table>
+        </p>
+</div>
+}
