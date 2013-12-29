@@ -9,7 +9,14 @@
     <input id="btnBackToHome" type="button" value="Back To Home" onclick="location.href='@Url.Action("Index","Movie")'" />
 </p>
 <div>
+    @if (ViewData.Model[0].Poster.Length < 5 )
+    {
+    <img src="~/Content/noPosterAvailable.jpg" alt="no poster" />
+    }
+    else
+    {
     <img src="@ViewData.Model[0].Poster" alt="poster" />
+    }
     <table>
         <tr>
             <td>
