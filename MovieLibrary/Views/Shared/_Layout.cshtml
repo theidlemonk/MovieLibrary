@@ -1,13 +1,19 @@
 ﻿<!DOCTYPE html>
-
+<ul id="menu">
+    <li><a href="~/Movie/Index" class="home"><span></span></a></li>
+    <li><a href="~/About/Index" class="portfolio"><span></span></a></li>
+</ul>
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <link rel="shortcut icon" type="image/x-icon" href="~/Content/favicon.ico" />
     <title>MOVIE LIBRARY</title>
+    <link rel="stylesheet" type="text/css" href="~/Content/MovieStyleSheet.css">
+    <script src="~/Scripts/jquery-2.0.3.js" type="text/javascript"></script>
+    <script src="~/Scripts/MovieMenuStylingScript.js" type="text/javascript"> </script>
 </head>
 <body>
-    <div>
+    <div class="page-wrapper">
         @RenderBody()
     </div>
 </body>

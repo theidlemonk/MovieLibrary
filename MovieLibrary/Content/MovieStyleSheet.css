@@ -1,0 +1,117 @@
+﻿/*
+    Menu Styling Start
+*/
+ul#menu
+{
+    width: 80%;
+    height: 102px;
+    background: url('bg.png') repeat-x;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    padding-top: 20px;
+    padding-left: 20%;
+}
+
+    ul#menu li
+    {
+        float: left;
+    }
+
+        ul#menu li a
+        {
+            background: url('sprite.png') no-repeat scroll top left;
+            display: block;
+            height: 81px;
+            position: relative;
+        }
+
+            ul#menu li a.home
+            {
+                width: 159px;
+            }
+
+            ul#menu li a.portfolio
+            {
+                width: 157px;
+                background-position: -159px 0px;
+            }
+
+            ul#menu li a span
+            {
+                background: url('sprite.png') no-repeat scroll bottom left;
+                display: block;
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 100%;
+                z-index: 100;
+            }
+
+            ul#menu li a.home span
+            {
+                background-position: 0px -81px;
+            }
+
+            ul#menu li a.portfolio span
+            {
+                background-position: -159px -81px;
+            }
+
+            ul#menu li a span:hover
+            {
+                cursor: crosshair;
+            }
+
+/*
+    Menu Styling End
+*/
+
+/*
+    Site CSS
+*/
+
+@font-face
+{
+    font-family: 'Nixie One';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Nixie One'), local('NixieOne-Regular'), url(http://themes.googleusercontent.com/static/fonts/nixieone/v4/gQ0PT3rPU_Et2ExNz-ahmj8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
+}
+
+body
+{
+    font-family: Nixie One;
+    background-color: #333333;
+    margin: 0;
+}
+
+.page-wrapper
+{
+    background-color: yellow;
+    margin: 35px;
+    padding: 35px;
+    z-index: 2;
+    text-align: center;
+}
+
+h1
+{
+    z-index: 3;
+    background-color: aquamarine;
+    margin: 35px;
+    padding: 35px;
+    font-size: 70px;
+}
+
+.grid
+{
+    margin: 0px auto;
+    border-spacing: 10px;
+    border-collapse: separate;
+    border-color: blue;
+    background-color:aquamarine;
+    /*color:white;*/
+    font-weight: 800;
+}
