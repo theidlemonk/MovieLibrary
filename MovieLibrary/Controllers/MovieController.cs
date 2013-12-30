@@ -54,7 +54,7 @@ namespace MovieLibrary.Controllers
                 }
             }
 
-            //return View("MovieLists", viewMovie);
+            Session["searchResults"] = viewMovie;
             return View("MovieHome", viewMovie);
         }
 
@@ -90,11 +90,15 @@ namespace MovieLibrary.Controllers
 
         public ActionResult Index()
         {
-            if (ModelState.IsValid)
-            {
-                ModelState.Clear();
-            }
+            ModelState.Clear();
+            Session["searchResults"] = null;
             return View("MovieHome");
+        }
+
+        public ActionResult ShowSearchResultsPage()
+        {
+            List<MovieLibrary.Models.Movie> products = Session["searchResults"] as List<MovieLibrary.Models.Movie>;
+            return View("MovieHome", products);
         }
 
     }

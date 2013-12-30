@@ -7,11 +7,12 @@
 <p>
     @*@Html.ActionLink("Back To Home", "Index", "Movie")*@
     <input id="btnBackToHome" type="button" value="Back To Home" onclick="location.href='@Url.Action("Index","Movie")'" />
+    <input id="btnBackToSearchResults" type="button" value="Back To Search Reults" onclick="location.href='@Url.Action("ShowSearchResultsPage","Movie")'" />
 </p>
 <div>
     @if (ViewData.Model[0].Poster.Length < 5 )
     {
-    <img src="~/Content/noPosterAvailable.jpg" alt="no poster" />
+    <img src="~/Content/noPosterAvailable.jpg" alt="no poster"  />
     }
     else
     {
